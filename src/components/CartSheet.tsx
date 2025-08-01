@@ -136,81 +136,87 @@ const CartSheet = ({ children }: CartSheetProps) => {
           </div>
 
           {/* Checkout Section - Right Side */}
-          <div className="w-80 p-6 bg-card/30 backdrop-blur-md">
+          <div className="w-80 p-6 bg-card/30 backdrop-blur-md flex flex-col h-full">
             <h3 className="text-xl font-bold text-foreground mb-6">Checkout</h3>
             
             {items.length > 0 ? (
-              <div className="space-y-6">
-                {/* Order Summary */}
-                <div className="space-y-3">
-                  <h4 className="font-semibold text-foreground">Order Summary</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Subtotal</span>
-                      <span className="text-foreground">${getTotalPrice().toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Processing Fee</span>
-                      <span className="text-foreground">$29.99</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Delivery</span>
-                      <Badge variant="secondary">Free</Badge>
-                    </div>
-                    <Separator />
-                    <div className="flex justify-between text-lg font-bold">
-                      <span className="text-foreground">Total</span>
-                      <span className="text-primary">${(getTotalPrice() + 29.99).toFixed(2)}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Payment Form */}
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-foreground">Payment Details</h4>
-                  
+              <div className="flex flex-col h-full">
+                {/* Scrollable Content */}
+                <div className="flex-1 overflow-y-auto space-y-6 pr-2">
+                  {/* Order Summary */}
                   <div className="space-y-3">
-                    <div>
-                      <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" placeholder="your@email.com" />
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="card">Card Number</Label>
-                      <Input id="card" placeholder="1234 5678 9012 3456" />
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <Label htmlFor="expiry">Expiry</Label>
-                        <Input id="expiry" placeholder="MM/YY" />
+                    <h4 className="font-semibold text-foreground">Order Summary</h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Subtotal</span>
+                        <span className="text-foreground">${getTotalPrice().toFixed(2)}</span>
                       </div>
-                      <div>
-                        <Label htmlFor="cvc">CVC</Label>
-                        <Input id="cvc" placeholder="123" />
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Processing Fee</span>
+                        <span className="text-foreground">$29.99</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Delivery</span>
+                        <Badge variant="secondary">Free</Badge>
+                      </div>
+                      <Separator />
+                      <div className="flex justify-between text-lg font-bold">
+                        <span className="text-foreground">Total</span>
+                        <span className="text-primary">${(getTotalPrice() + 29.99).toFixed(2)}</span>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Payment Form */}
+                  <div className="space-y-4">
+                    <h4 className="font-semibold text-foreground">Payment Details</h4>
                     
-                    <div>
-                      <Label htmlFor="name">Cardholder Name</Label>
-                      <Input id="name" placeholder="John Doe" />
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="email">Email</Label>
+                        <Input id="email" type="email" placeholder="your@email.com" />
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="card">Card Number</Label>
+                        <Input id="card" placeholder="1234 5678 9012 3456" />
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <Label htmlFor="expiry">Expiry</Label>
+                          <Input id="expiry" placeholder="MM/YY" />
+                        </div>
+                        <div>
+                          <Label htmlFor="cvc">CVC</Label>
+                          <Input id="cvc" placeholder="123" />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="name">Cardholder Name</Label>
+                        <Input id="name" placeholder="John Doe" />
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Checkout Button */}
-                <Button 
-                  className="w-full" 
-                  size="lg"
-                  onClick={handleCheckout}
-                >
-                  <Lock className="h-4 w-4 mr-2" />
-                  Complete Purchase
-                </Button>
+                {/* Fixed Bottom Section */}
+                <div className="mt-6 pt-4 border-t border-border/50 space-y-4">
+                  {/* Checkout Button */}
+                  <Button 
+                    className="w-full" 
+                    size="lg"
+                    onClick={handleCheckout}
+                  >
+                    <CreditCard className="h-4 w-4 mr-2" />
+                    Proceed to Pay
+                  </Button>
 
-                <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-                  <Lock className="h-3 w-3" />
-                  <span>Secured by 256-bit SSL encryption</span>
+                  <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                    <Lock className="h-3 w-3" />
+                    <span>Secured by 256-bit SSL encryption</span>
+                  </div>
                 </div>
               </div>
             ) : (
