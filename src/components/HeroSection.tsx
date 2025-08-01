@@ -25,14 +25,14 @@ const HeroSection = () => {
   return (
     <section className="relative h-screen overflow-hidden">
       {/* Background Slideshow */}
-      <div className="absolute inset-0 parallax overflow-hidden">
+      <div className="absolute inset-0 slideshow-container">
         {backgroundImages.map((image, index) => (
           <img 
             key={index}
             src={image}
             alt={`Pool design ${index + 1}`}
-            className={`absolute w-full h-full object-cover transition-opacity duration-1000 ${
-              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            className={`slideshow-image ${
+              index === currentImageIndex ? 'active' : ''
             }`}
           />
         ))}

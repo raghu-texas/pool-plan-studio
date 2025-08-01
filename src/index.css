@@ -293,4 +293,27 @@ All colors MUST be HSL for consistency across light/dark modes.
   .animate-cinematic-zoom {
     animation: cinematic-zoom 20s ease-in-out infinite;
   }
+
+  /* Background Slideshow Animations */
+  .slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .slideshow-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+  }
+
+  .slideshow-image.active {
+    opacity: 1;
+  }
 }
