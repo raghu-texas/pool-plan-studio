@@ -7,15 +7,11 @@ const HeroSection = () => {
     <section className="relative h-screen overflow-hidden">
       {/* Background Video with Parallax Effect */}
       <div className="absolute inset-0 parallax">
-        <video 
-          autoPlay 
-          muted 
-          loop 
+        <img 
+          src="/lovable-uploads/aca85d2f-eedc-46ea-b90d-295dc49384e1.png"
+          alt="Tropical resort with luxury pool"
           className="w-full h-full object-cover"
-          poster={heroImage}
-        >
-          <source src="https://videos.pexels.com/video-files/4041968/4041968-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-        </video>
+        />
         <div className="absolute inset-0 hero-overlay" />
         
         {/* Floating cinematic particles */}
