@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Heart, ShoppingCart, Star, Eye, Filter, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
+import PoolPlanDetails from "./PoolPlanDetails";
 
 // Sample pool plans data
 const popularPlans = [
@@ -121,6 +122,14 @@ const PopularPlans = () => {
     category: "All Categories",
     specialFeatures: "All Features"
   });
+  
+  const [selectedPlan, setSelectedPlan] = useState<typeof popularPlans[0] | null>(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  
+  const handleViewDetails = (plan: typeof popularPlans[0]) => {
+    setSelectedPlan(plan);
+    setIsDetailsOpen(true);
+  };
 
   const filteredPlans = popularPlans.filter(plan => {
     return (
@@ -287,7 +296,12 @@ const PopularPlans = () => {
                   </div>
                   
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1 group">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1 group"
+                      onClick={() => handleViewDetails(plan)}
+                    >
                       <Eye className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
                       View Details
                     </Button>
@@ -308,6 +322,15 @@ const PopularPlans = () => {
             Load More Plans
           </Button>
         </div>
+        
+        {/* Pool Plan Details Modal */}
+        {selectedPlan && (
+          <PoolPlanDetails 
+            isOpen={isDetailsOpen}
+            onClose={() => setIsDetailsOpen(false)}
+            plan={selectedPlan}
+          />
+        )}
       </div>
     </section>
   );
