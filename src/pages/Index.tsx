@@ -20,12 +20,26 @@ const Index = () => {
         <HeroSection />
         
         {/* Ad between Hero and Categories */}
-        <AdBanner adSlot="2345678901" className="py-6" />
+        <div className="py-6 flex justify-center">
+          <img 
+            src="/lovable-uploads/c40c4b19-fe94-4f89-94b7-d5dff87b808e.png" 
+            alt="Hot Home Designs Advertisement" 
+            className="max-w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
+            onClick={() => window.open('#', '_blank')}
+          />
+        </div>
         
         <FeaturedCategories />
         
         {/* Ad between Categories and Popular Plans */}
-        <AdBanner adSlot="3456789012" className="py-6" />
+        <div className="py-6 flex justify-center">
+          <img 
+            src="/lovable-uploads/c40c4b19-fe94-4f89-94b7-d5dff87b808e.png" 
+            alt="Hot Home Designs Advertisement" 
+            className="max-w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
+            onClick={() => window.open('#', '_blank')}
+          />
+        </div>
         
         <PopularPlans />
         
@@ -37,7 +51,14 @@ const Index = () => {
         <Amenities />
         
         {/* Ad between Amenities and Subscription */}
-        <AdBanner adSlot="5678901234" className="py-6" />
+        <div className="py-6 flex justify-center">
+          <img 
+            src="/lovable-uploads/c40c4b19-fe94-4f89-94b7-d5dff87b808e.png" 
+            alt="Hot Home Designs Advertisement" 
+            className="max-w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
+            onClick={() => window.open('#', '_blank')}
+          />
+        </div>
         
         <SubscriptionBanner />
         
