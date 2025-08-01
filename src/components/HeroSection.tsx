@@ -1,17 +1,41 @@
 import { Button } from "@/components/ui/button";
-import { Play, Search, Star } from "lucide-react";
-import heroImage from "@/assets/hero-pool.jpg";
+import { Search, Star } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const HeroSection = () => {
+  const backgroundImages = [
+    "/lovable-uploads/pool-rooftop.png",
+    "/lovable-uploads/pool-backyard.png", 
+    "/lovable-uploads/pool-curved.png",
+    "/lovable-uploads/pool-infinity.png"
+  ];
+  
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % backgroundImages.length
+      );
+    }, 4000); // Change image every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
+
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background with Cinematic Zoom Effect */}
+      {/* Background Slideshow */}
       <div className="absolute inset-0 parallax overflow-hidden">
-        <img 
-          src="/lovable-uploads/aca85d2f-eedc-46ea-b90d-295dc49384e1.png"
-          alt="Tropical resort with luxury pool"
-          className="w-full h-full object-cover animate-cinematic-zoom"
-        />
+        {backgroundImages.map((image, index) => (
+          <img 
+            key={index}
+            src={image}
+            alt={`Pool design ${index + 1}`}
+            className={`absolute w-full h-full object-cover transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))}
         <div className="absolute inset-0 hero-overlay" />
         
         {/* Floating cinematic particles */}
