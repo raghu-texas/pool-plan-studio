@@ -193,6 +193,48 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
                   <div className="text-muted-foreground text-sm">Total Area</div>
                 </div>
               </div>
+
+              {/* Dimension Images */}
+              <div className="glass rounded-xl p-6 border border-white/20">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
+                  <Ruler className="h-5 w-5 mr-2 text-accent" />
+                  Technical Dimensions
+                </h3>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="relative group overflow-hidden rounded-lg border border-white/10">
+                    <img 
+                      src="/lovable-uploads/a50eef3c-fa7e-4aa8-aa5d-a661655a6318.png" 
+                      alt="Pool cross-section and diving depth dimensions"
+                      className="w-full h-auto object-contain bg-white/90 p-2"
+                    />
+                    <div className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
+                      Cross-Section View
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="relative group overflow-hidden rounded-lg border border-white/10">
+                      <img 
+                        src="/lovable-uploads/34594a43-548a-4492-9f7b-3ec19622ab42.png" 
+                        alt="Pool layout for parties with top view"
+                        className="w-full h-auto object-contain bg-white/90 p-2"
+                      />
+                      <div className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
+                        Party Layout
+                      </div>
+                    </div>
+                    <div className="relative group overflow-hidden rounded-lg border border-white/10">
+                      <img 
+                        src="/lovable-uploads/f7fe7eb9-e0a8-4974-a975-aafaf35acd24.png" 
+                        alt="Detailed pool measurements and dimensions"
+                        className="w-full h-auto object-contain bg-white/90 p-2"
+                      />
+                      <div className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
+                        Measurements
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Right Column - Details */}
