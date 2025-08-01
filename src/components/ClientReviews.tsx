@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
@@ -8,7 +8,9 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const reviews = [
   {
@@ -17,7 +19,7 @@ const reviews = [
     location: "Beverly Hills, CA",
     rating: 5,
     review: "Amazing pool design! The team was professional and delivered exactly what we envisioned. Our backyard has been transformed into a paradise.",
-    image: "/lovable-uploads/4c595a9c-1b15-4f57-be89-00e8942cac7a.png",
+    clientPhoto: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=400&fit=crop&crop=face",
     poolType: "Infinity Pool"
   },
   {
@@ -26,7 +28,7 @@ const reviews = [
     location: "Austin, TX",
     rating: 5,
     review: "Exceptional service from start to finish. The quality of work exceeded our expectations and the pool plans were very detailed and easy to follow.",
-    image: "/lovable-uploads/aca85d2f-eedc-46ea-b90d-295dc49384e1.png",
+    clientPhoto: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face",
     poolType: "Lap Pool"
   },
   {
@@ -35,7 +37,7 @@ const reviews = [
     location: "Miami, FL",
     rating: 5,
     review: "Best investment we ever made! The pool design perfectly fits our space and lifestyle. Highly recommend their services to anyone.",
-    image: "/lovable-uploads/4c595a9c-1b15-4f57-be89-00e8942cac7a.png",
+    clientPhoto: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=400&fit=crop&crop=face",
     poolType: "Resort Style"
   },
   {
@@ -44,7 +46,7 @@ const reviews = [
     location: "Phoenix, AZ",
     rating: 5,
     review: "Outstanding attention to detail. The team guided us through every step and the final result is absolutely stunning. Worth every penny!",
-    image: "/lovable-uploads/aca85d2f-eedc-46ea-b90d-295dc49384e1.png",
+    clientPhoto: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=400&fit=crop&crop=face",
     poolType: "Modern Pool"
   },
 ];
@@ -67,6 +69,7 @@ const ClientReviews = () => {
             align: "start",
             loop: true,
           }}
+          plugins={[Autoplay({ delay: 4000, stopOnInteraction: true })]}
           className="w-full max-w-6xl mx-auto"
         >
           <CarouselContent className="-ml-2 md:-ml-4">
@@ -87,9 +90,11 @@ const ClientReviews = () => {
                     </div>
                     
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white font-semibold">
-                        {review.name.split(' ').map(n => n[0]).join('')}
-                      </div>
+                      <img 
+                        src={review.clientPhoto} 
+                        alt={review.name}
+                        className="w-12 h-12 rounded-full object-cover border-2 border-primary/20"
+                      />
                       <div>
                         <h4 className="font-semibold text-foreground">{review.name}</h4>
                         <p className="text-sm text-muted-foreground">{review.location}</p>
