@@ -4,22 +4,30 @@ import { useState, useEffect } from "react";
 
 const HeroSection = () => {
   const backgroundImages = [
-    "/lovable-uploads/pool-rooftop.png",
-    "/lovable-uploads/pool-backyard.png", 
-    "/lovable-uploads/pool-curved.png",
-    "/lovable-uploads/pool-infinity.png"
+    "/lovable-uploads/31981400-0b46-469e-93db-dfb6e38257d2.png",
+    "/lovable-uploads/741b1525-de27-4767-8844-fa73390ff169.png", 
+    "/lovable-uploads/e8da1b49-3600-4a1f-87b1-97de0b8d9e58.png",
+    "/lovable-uploads/6f5d1ffc-2047-4cff-80a0-346e12bcdf51.png"
   ];
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    console.log("Slideshow starting with images:", backgroundImages);
+    console.log("Initial image index:", currentImageIndex);
+    
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        (prevIndex + 1) % backgroundImages.length
-      );
+      setCurrentImageIndex((prevIndex) => {
+        const newIndex = (prevIndex + 1) % backgroundImages.length;
+        console.log("Changing from image", prevIndex, "to image", newIndex);
+        return newIndex;
+      });
     }, 4000); // Change image every 4 seconds
 
-    return () => clearInterval(interval);
+    return () => {
+      console.log("Slideshow cleanup");
+      clearInterval(interval);
+    };
   }, [backgroundImages.length]);
 
   return (
@@ -34,6 +42,12 @@ const HeroSection = () => {
             className={`slideshow-image ${
               index === currentImageIndex ? 'active' : ''
             }`}
+            onLoad={() => console.log(`Image ${index} loaded:`, image)}
+            onError={() => console.error(`Image ${index} failed to load:`, image)}
+            style={{
+              opacity: index === currentImageIndex ? 1 : 0,
+              transition: 'opacity 1.5s ease-in-out'
+            }}
           />
         ))}
         <div className="absolute inset-0 hero-overlay" />
