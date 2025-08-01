@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/contexts/CartContext";
 import { ShoppingCart, Minus, Plus, Trash2, CreditCard, Lock } from "lucide-react";
 import { useState } from "react";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 interface CartSheetProps {
   children: React.ReactNode;
@@ -16,6 +16,7 @@ interface CartSheetProps {
 
 const CartSheet = ({ children }: CartSheetProps) => {
   const { items, removeFromCart, clearCart } = useCart();
+  const { toast } = useToast();
   const [quantities, setQuantities] = useState<Record<number, number>>({});
   
   const updateQuantity = (id: number, newQuantity: number) => {
