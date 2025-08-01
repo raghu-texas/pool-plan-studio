@@ -66,7 +66,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
         <div className="text-center text-white max-w-4xl mx-auto">
           <div className="animate-fade-in-up">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
               Explore the Perfect
               <span className="block bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
                 Pool Design
