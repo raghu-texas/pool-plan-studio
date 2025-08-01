@@ -314,10 +314,29 @@ const PopularPlans = () => {
               className="pool-card group border-0 shadow-custom-lg overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="relative">
-                {/* Automatic Slideshow */}
+              <div className="relative group" 
+                onMouseEnter={(e) => {
+                  const carousel = e.currentTarget.querySelector('.embla__viewport');
+                  if (carousel) {
+                    const autoplayInstance = (carousel as any)?.__embla?.plugins()?.autoplay;
+                    if (autoplayInstance) {
+                      autoplayInstance.play();
+                    }
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  const carousel = e.currentTarget.querySelector('.embla__viewport');
+                  if (carousel) {
+                    const autoplayInstance = (carousel as any)?.__embla?.plugins()?.autoplay;
+                    if (autoplayInstance) {
+                      autoplayInstance.stop();
+                    }
+                  }
+                }}
+              >
+                {/* Hover-triggered Slideshow */}
                 <Carousel
-                  plugins={[Autoplay({ delay: 3000, stopOnInteraction: true })]}
+                  plugins={[Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false, playOnInit: false })]}
                   className="w-full"
                 >
                   <CarouselContent>
