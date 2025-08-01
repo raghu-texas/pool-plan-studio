@@ -55,21 +55,6 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          {/* Stats */}
-          <div className="animate-fade-in-up grid grid-cols-1 md:grid-cols-3 gap-8 mt-16" style={{ animationDelay: "0.6s" }}>
-            <div className="glass rounded-xl p-6 text-center">
-              <div className="text-3xl font-bold text-accent mb-2">500+</div>
-              <div className="text-white/80">Premium Designs</div>
-            </div>
-            <div className="glass rounded-xl p-6 text-center">
-              <div className="text-3xl font-bold text-accent mb-2">50K+</div>
-              <div className="text-white/80">Happy Customers</div>
-            </div>
-            <div className="glass rounded-xl p-6 text-center">
-              <div className="text-3xl font-bold text-accent mb-2">25+</div>
-              <div className="text-white/80">Design Categories</div>
-            </div>
-          </div>
         </div>
       </div>
 
