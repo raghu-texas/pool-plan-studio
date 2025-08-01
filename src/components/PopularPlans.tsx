@@ -189,17 +189,37 @@ const PopularPlans = () => {
           </Button>
         </div>
 
-        {/* Filters Section */}
+        {/* Quick Category Filter */}
+        <div className="glass p-6 rounded-xl mb-8 backdrop-blur-md border border-white/20">
+          <div className="flex items-center gap-4 mb-4">
+            <h3 className="text-lg font-semibold text-foreground">Explore by Category</h3>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {filterOptions.category.map((category) => (
+              <Button
+                key={category}
+                variant={filters.category === category ? "default" : "outline"}
+                size="sm"
+                onClick={() => setFilters(prev => ({ ...prev, category }))}
+                className="transition-all duration-200"
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Advanced Filters Section */}
         <div className="glass p-6 rounded-xl mb-12 backdrop-blur-md border border-white/20">
           <div className="flex items-center gap-4 mb-6">
             <div className="flex items-center gap-2">
               <SlidersHorizontal className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold text-foreground">Filter Pool Plans</h3>
+              <h3 className="text-lg font-semibold text-foreground">Advanced Filters</h3>
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {Object.entries(filterOptions).map(([filterKey, options]) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {Object.entries(filterOptions).filter(([key]) => key !== 'category').map(([filterKey, options]) => (
               <div key={filterKey} className="space-y-2">
                 <label className="text-sm font-medium text-foreground capitalize">
                   {filterKey.replace(/([A-Z])/g, ' $1').trim()}
