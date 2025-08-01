@@ -67,9 +67,9 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
             muted 
             loop 
             className="w-full h-full object-cover"
-            poster="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1920&h=1080&fit=crop"
+            poster="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&h=1080&fit=crop"
           >
-            <source src="https://videos.pexels.com/video-files/4041968/4041968-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+            <source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/80 to-background/70 backdrop-blur-sm"></div>
         </div>
