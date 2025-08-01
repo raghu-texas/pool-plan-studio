@@ -5,12 +5,12 @@ import heroImage from "@/assets/hero-pool.jpg";
 const HeroSection = () => {
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background Video with Parallax Effect */}
-      <div className="absolute inset-0 parallax">
+      {/* Background with Cinematic Zoom Effect */}
+      <div className="absolute inset-0 parallax overflow-hidden">
         <img 
           src="/lovable-uploads/aca85d2f-eedc-46ea-b90d-295dc49384e1.png"
           alt="Tropical resort with luxury pool"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover animate-cinematic-zoom"
         />
         <div className="absolute inset-0 hero-overlay" />
         
