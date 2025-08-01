@@ -7,10 +7,13 @@ import Amenities from "@/components/Amenities";
 import SubscriptionBanner from "@/components/SubscriptionBanner";
 import Footer from "@/components/Footer";
 import AdBanner from "@/components/AdBanner";
+import FloatingAd from "@/components/FloatingAd";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      {/* Floating Advertisement */}
+      <FloatingAd />
       <Header />
       
       {/* Top Banner Ad */}
