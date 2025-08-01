@@ -3,8 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Heart, ShoppingCart, Star, Eye, Filter, SlidersHorizontal } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PoolPlanDetails from "./PoolPlanDetails";
+import HoverCarousel from "./HoverCarousel";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "@/hooks/use-toast";
 import {
@@ -314,46 +315,12 @@ const PopularPlans = () => {
               className="pool-card group border-0 shadow-custom-lg overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="relative group" 
-                onMouseEnter={(e) => {
-                  const carousel = e.currentTarget.querySelector('.embla__viewport');
-                  if (carousel) {
-                    const autoplayInstance = (carousel as any)?.__embla?.plugins()?.autoplay;
-                    if (autoplayInstance) {
-                      autoplayInstance.play();
-                    }
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  const carousel = e.currentTarget.querySelector('.embla__viewport');
-                  if (carousel) {
-                    const autoplayInstance = (carousel as any)?.__embla?.plugins()?.autoplay;
-                    if (autoplayInstance) {
-                      autoplayInstance.stop();
-                    }
-                  }
-                }}
-              >
-                {/* Hover-triggered Slideshow */}
-                <Carousel
-                  plugins={[Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false, playOnInit: false })]}
-                  className="w-full"
-                >
-                  <CarouselContent>
-                    {plan.images.map((image, imageIndex) => (
-                      <CarouselItem key={imageIndex}>
-                        <img 
-                          src={image} 
-                          alt={`${plan.name} - View ${imageIndex + 1}`}
-                          className="w-full h-64 object-cover cursor-pointer transition-transform hover:scale-105"
-                          onClick={() => handleViewDetails(plan)}
-                        />
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 hover:bg-white" />
-                  <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 hover:bg-white" />
-                </Carousel>
+              <div className="relative">
+                <HoverCarousel 
+                  images={plan.images}
+                  planName={plan.name}
+                  onImageClick={() => handleViewDetails(plan)}
+                />
                 
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
