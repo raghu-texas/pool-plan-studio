@@ -26,7 +26,7 @@ interface PoolPlanDetailsProps {
 }
 
 const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
-  // Dummy detailed data
+  // Dummy detailed data with multiple pool images and dimensions
   const detailsData = {
     depth: "3' - 8'",
     poolDimensions: plan.dimensions,
@@ -34,6 +34,36 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
     perimeter: "130'",
     totalArea: "800 sq ft",
     volume: "24,000 gallons",
+    poolImages: [
+      {
+        id: 1,
+        src: "/lovable-uploads/4c595a9c-1b15-4f57-be89-00e8942cac7a.png",
+        title: "Top View Plan",
+        dimensions: "40' x 20' x 8' Deep",
+        description: "Complete overhead layout with spa integration"
+      },
+      {
+        id: 2,
+        src: "https://images.unsplash.com/photo-1566842600175-97dca489844f?w=400&h=300&fit=crop",
+        title: "Side View Profile",
+        dimensions: "40' L x 8' D",
+        description: "Cross-section showing depth variations"
+      },
+      {
+        id: 3,
+        src: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=300&fit=crop",
+        title: "3D Perspective",
+        dimensions: "40' x 20' Overall",
+        description: "Realistic rendering with landscaping"
+      },
+      {
+        id: 4,
+        src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+        title: "Detail Views", 
+        dimensions: "Spa: 8' x 8'",
+        description: "Equipment layout and plumbing details"
+      }
+    ],
     equipmentIncluded: [
       "Variable Speed Pump",
       "Salt Water System", 
@@ -87,15 +117,33 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
         {/* Content */}
         <div className="relative z-10 p-6 overflow-y-auto max-h-[90vh]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Left Column - Image & Stats */}
+            {/* Left Column - Multiple Pool Images with Dimensions */}
             <div className="space-y-6">
-              {/* Main Image */}
-              <div className="glass rounded-xl overflow-hidden border border-white/20">
-                <img 
-                  src={plan.image} 
-                  alt={plan.name}
-                  className="w-full h-80 object-cover"
-                />
+              {/* Pool Plan Images Grid */}
+              <div className="glass rounded-xl p-6 border border-white/20">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
+                  <MapPin className="h-5 w-5 mr-2 text-accent" />
+                  Pool Design Plans & Views
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {detailsData.poolImages.map((poolImage) => (
+                    <div key={poolImage.id} className="space-y-3">
+                      <div className="relative group overflow-hidden rounded-lg border border-white/10">
+                        <img 
+                          src={poolImage.src} 
+                          alt={poolImage.title}
+                          className="w-full h-40 object-cover transition-transform group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                      <div className="space-y-1">
+                        <div className="font-semibold text-foreground text-sm">{poolImage.title}</div>
+                        <div className="text-accent font-bold text-sm">{poolImage.dimensions}</div>
+                        <div className="text-muted-foreground text-xs">{poolImage.description}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Stats Cards (Similar to reference image) */}
