@@ -11,6 +11,7 @@ import {
   Crown
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import CartIcon from "./CartIcon";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -67,14 +68,7 @@ const Header = () => {
             </Button>
 
             {/* Cart */}
-            <Button variant="ghost" size="icon" className="relative hover:bg-accent/20">
-              <ShoppingCart className="h-5 w-5" />
-              {itemCount > 0 && (
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-accent text-accent-foreground text-xs">
-                  {itemCount > 99 ? '99+' : itemCount}
-                </Badge>
-              )}
-            </Button>
+            <CartIcon />
 
             {/* User Account */}
             <Button variant="outline" size="sm" className="hidden sm:flex">
