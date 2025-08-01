@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { X, Download, Heart, Share2, MapPin, Ruler, Waves, Sparkles } from "lucide-react";
+import { X, Download, Heart, Share2, MapPin, Ruler, Waves, Sparkles, ZoomIn } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -12,6 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { useState } from "react";
 
 interface PoolPlanDetailsProps {
   isOpen: boolean;
@@ -35,6 +36,9 @@ interface PoolPlanDetailsProps {
 }
 
 const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
+  const [isDimensionPopupOpen, setIsDimensionPopupOpen] = useState(false);
+  const [selectedDimensionImage, setSelectedDimensionImage] = useState(0);
+  
   // Dummy detailed data with multiple pool images and dimensions
   const detailsData = {
     depth: "3' - 8'",
@@ -71,6 +75,26 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
         title: "Detail Views", 
         dimensions: "Spa: 8' x 8'",
         description: "Equipment layout and plumbing details"
+      }
+    ],
+    dimensionImages: [
+      {
+        id: 1,
+        src: "/lovable-uploads/a50eef3c-fa7e-4aa8-aa5d-a661655a6318.png",
+        title: "Cross-Section View",
+        description: "Pool cross-section and diving depth dimensions"
+      },
+      {
+        id: 2,
+        src: "/lovable-uploads/34594a43-548a-4492-9f7b-3ec19622ab42.png",
+        title: "Party Layout",
+        description: "Pool layout for parties with top view"
+      },
+      {
+        id: 3,
+        src: "/lovable-uploads/f7fe7eb9-e0a8-4974-a975-aafaf35acd24.png",
+        title: "Detailed Measurements",
+        description: "Detailed pool measurements and dimensions"
       }
     ],
     equipmentIncluded: [
@@ -194,46 +218,51 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
                 </div>
               </div>
 
-              {/* Dimension Images */}
+              {/* Dimension Images Slideshow */}
               <div className="glass rounded-xl p-6 border border-white/20">
                 <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Ruler className="h-5 w-5 mr-2 text-accent" />
                   Technical Dimensions
+                  <span className="text-xs text-muted-foreground ml-2">(Click to enlarge)</span>
                 </h3>
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="relative group overflow-hidden rounded-lg border border-white/10">
-                    <img 
-                      src="/lovable-uploads/a50eef3c-fa7e-4aa8-aa5d-a661655a6318.png" 
-                      alt="Pool cross-section and diving depth dimensions"
-                      className="w-full h-auto object-contain bg-white/90 p-2"
-                    />
-                    <div className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
-                      Cross-Section View
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="relative group overflow-hidden rounded-lg border border-white/10">
-                      <img 
-                        src="/lovable-uploads/34594a43-548a-4492-9f7b-3ec19622ab42.png" 
-                        alt="Pool layout for parties with top view"
-                        className="w-full h-auto object-contain bg-white/90 p-2"
-                      />
-                      <div className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
-                        Party Layout
-                      </div>
-                    </div>
-                    <div className="relative group overflow-hidden rounded-lg border border-white/10">
-                      <img 
-                        src="/lovable-uploads/f7fe7eb9-e0a8-4974-a975-aafaf35acd24.png" 
-                        alt="Detailed pool measurements and dimensions"
-                        className="w-full h-auto object-contain bg-white/90 p-2"
-                      />
-                      <div className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
-                        Measurements
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
+                <Carousel
+                  plugins={[Autoplay({ delay: 5000, stopOnInteraction: true })]}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {detailsData.dimensionImages.map((dimensionImg, index) => (
+                      <CarouselItem key={dimensionImg.id}>
+                        <div 
+                          className="relative group overflow-hidden rounded-lg border border-white/10 cursor-pointer hover-scale"
+                          onClick={() => {
+                            setSelectedDimensionImage(index);
+                            setIsDimensionPopupOpen(true);
+                          }}
+                        >
+                          <img 
+                            src={dimensionImg.src} 
+                            alt={dimensionImg.description}
+                            className="w-full h-48 object-contain bg-white/90 p-2 transition-transform group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <ZoomIn className="h-8 w-8 text-white" />
+                            </div>
+                          </div>
+                          <div className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
+                            {dimensionImg.title}
+                          </div>
+                          <div className="absolute bottom-2 right-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
+                            {index + 1} of {detailsData.dimensionImages.length}
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-4 bg-white/90 hover:bg-white border-0" />
+                  <CarouselNext className="right-4 bg-white/90 hover:bg-white border-0" />
+                </Carousel>
               </div>
             </div>
 
@@ -345,6 +374,63 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
           </div>
         </div>
       </DialogContent>
+
+      {/* Dimension Image Popup */}
+      <Dialog open={isDimensionPopupOpen} onOpenChange={setIsDimensionPopupOpen}>
+        <DialogContent className="max-w-5xl max-h-[90vh] overflow-hidden p-0 border-0 bg-black/95">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsDimensionPopupOpen(false)}
+            className="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 text-white border border-white/20"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+          
+          <div className="relative p-6">
+            <Carousel
+              plugins={[Autoplay({ delay: 6000, stopOnInteraction: true })]}
+              className="w-full"
+            >
+              <CarouselContent>
+                {detailsData.dimensionImages.map((dimensionImg, index) => (
+                  <CarouselItem key={dimensionImg.id}>
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold text-white mb-4">{dimensionImg.title}</h3>
+                      <div className="relative bg-white rounded-lg p-4 mb-4">
+                        <img 
+                          src={dimensionImg.src} 
+                          alt={dimensionImg.description}
+                          className="w-full max-h-[60vh] object-contain mx-auto"
+                        />
+                      </div>
+                      <p className="text-white/80 text-lg">{dimensionImg.description}</p>
+                      <div className="text-white/60 text-sm mt-2">
+                        Image {index + 1} of {detailsData.dimensionImages.length}
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-4 bg-white/90 hover:bg-white border-0" />
+              <CarouselNext className="right-4 bg-white/90 hover:bg-white border-0" />
+            </Carousel>
+            
+            {/* Thumbnail Navigation */}
+            <div className="flex justify-center gap-2 mt-6">
+              {detailsData.dimensionImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedDimensionImage(index)}
+                  className={`w-3 h-3 rounded-full transition-colors ${
+                    selectedDimensionImage === index ? 'bg-white' : 'bg-white/30'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Dialog>
   );
 };
