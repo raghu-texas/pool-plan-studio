@@ -4,6 +4,14 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { X, Download, Heart, Share2, MapPin, Ruler, Waves, Sparkles } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 interface PoolPlanDetailsProps {
   isOpen: boolean;
@@ -12,6 +20,7 @@ interface PoolPlanDetailsProps {
     id: number;
     name: string;
     image: string;
+    images: string[];
     tags: string[];
     category: string;
     style: string;
@@ -119,28 +128,51 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Column - Multiple Pool Images with Dimensions */}
             <div className="space-y-6">
-              {/* Pool Plan Images Grid */}
+              {/* Pool Plan Images with Automatic Slideshow */}
               <div className="glass rounded-xl p-6 border border-white/20">
                 <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <MapPin className="h-5 w-5 mr-2 text-accent" />
                   Pool Design Plans & Views
                 </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {detailsData.poolImages.map((poolImage) => (
-                    <div key={poolImage.id} className="space-y-3">
-                      <div className="relative group overflow-hidden rounded-lg border border-white/10">
-                        <img 
-                          src={poolImage.src} 
-                          alt={poolImage.title}
-                          className="w-full h-40 object-cover transition-transform group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </div>
-                      <div className="space-y-1">
-                        <div className="font-semibold text-foreground text-sm">{poolImage.title}</div>
-                        <div className="text-accent font-bold text-sm">{poolImage.dimensions}</div>
-                        <div className="text-muted-foreground text-xs">{poolImage.description}</div>
-                      </div>
+                
+                {/* Main slideshow */}
+                <div className="mb-6">
+                  <Carousel
+                    plugins={[Autoplay({ delay: 4000, stopOnInteraction: true })]}
+                    className="w-full"
+                  >
+                    <CarouselContent>
+                      {plan.images.map((image, imageIndex) => (
+                        <CarouselItem key={imageIndex}>
+                          <div className="relative group overflow-hidden rounded-lg border border-white/10">
+                            <img 
+                              src={image} 
+                              alt={`${plan.name} - View ${imageIndex + 1}`}
+                              className="w-full h-64 object-cover transition-transform group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
+                              View {imageIndex + 1} of {plan.images.length}
+                            </div>
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="left-4 bg-white/90 hover:bg-white border-0" />
+                    <CarouselNext className="right-4 bg-white/90 hover:bg-white border-0" />
+                  </Carousel>
+                </div>
+
+                {/* Thumbnail grid */}
+                <div className="grid grid-cols-4 gap-3">
+                  {plan.images.map((image, thumbIndex) => (
+                    <div key={thumbIndex} className="relative group overflow-hidden rounded-lg border border-white/10 cursor-pointer">
+                      <img 
+                        src={image} 
+                        alt={`${plan.name} thumbnail ${thumbIndex + 1}`}
+                        className="w-full h-20 object-cover transition-transform group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                   ))}
                 </div>

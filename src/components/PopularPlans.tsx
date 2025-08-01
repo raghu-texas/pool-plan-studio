@@ -7,13 +7,27 @@ import { useState } from "react";
 import PoolPlanDetails from "./PoolPlanDetails";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "@/hooks/use-toast";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 // Sample pool plans data
 const popularPlans = [
   {
     id: 1,
     name: "Azure Infinity",
-    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1566842600175-97dca489844f?w=800&h=600&fit=crop",
+      "/lovable-uploads/7e723735-8f96-433a-86a9-b55034fb32f9.png"
+    ],
+    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop", // Main image for cart
     tags: ["Infinity Edge", "Modern", "Luxury"],
     category: "Modern",
     style: "High End",
@@ -29,6 +43,12 @@ const popularPlans = [
   {
     id: 2,
     name: "Resort Paradise",
+    images: [
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1571268929207-d3298a5a8b28?w=800&h=600&fit=crop",
+      "/lovable-uploads/7e723735-8f96-433a-86a9-b55034fb32f9.png"
+    ],
     image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop",
     tags: ["Entertaining", "Spa", "Large"],
     category: "Entertaining",
@@ -45,6 +65,12 @@ const popularPlans = [
   {
     id: 3,
     name: "Modern Zen",
+    images: [
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?w=800&h=600&fit=crop",
+      "/lovable-uploads/7e723735-8f96-433a-86a9-b55034fb32f9.png"
+    ],
     image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
     tags: ["Modern", "Minimalist", "Spa"],
     category: "Modern",
@@ -61,6 +87,12 @@ const popularPlans = [
   {
     id: 4,
     name: "Family Fun Pool",
+    images: [
+      "https://images.unsplash.com/photo-1565985050384-a5dff2a6e7c0?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop",
+      "/lovable-uploads/7e723735-8f96-433a-86a9-b55034fb32f9.png"
+    ],
     image: "https://images.unsplash.com/photo-1565985050384-a5dff2a6e7c0?w=800&h=600&fit=crop",
     tags: ["Family", "Play", "Slide"],
     category: "Family",
@@ -77,6 +109,12 @@ const popularPlans = [
   {
     id: 5,
     name: "Tropical Escape",
+    images: [
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1571268929207-d3298a5a8b28?w=800&h=600&fit=crop",
+      "/lovable-uploads/7e723735-8f96-433a-86a9-b55034fb32f9.png"
+    ],
     image: "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?w=800&h=600&fit=crop",
     tags: ["Tropical", "Rock Features", "Waterfall"],
     category: "Tropical",
@@ -93,6 +131,12 @@ const popularPlans = [
   {
     id: 6,
     name: "Urban Oasis",
+    images: [
+      "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+      "/lovable-uploads/7e723735-8f96-433a-86a9-b55034fb32f9.png"
+    ],
     image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop",
     tags: ["Urban", "Compact", "Modern"],
     category: "Modern",
@@ -271,11 +315,26 @@ const PopularPlans = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative">
-                <img 
-                  src={plan.image} 
-                  alt={plan.name}
-                  className="w-full h-64 object-cover"
-                />
+                {/* Automatic Slideshow */}
+                <Carousel
+                  plugins={[Autoplay({ delay: 3000, stopOnInteraction: true })]}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {plan.images.map((image, imageIndex) => (
+                      <CarouselItem key={imageIndex}>
+                        <img 
+                          src={image} 
+                          alt={`${plan.name} - View ${imageIndex + 1}`}
+                          className="w-full h-64 object-cover cursor-pointer transition-transform hover:scale-105"
+                          onClick={() => handleViewDetails(plan)}
+                        />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 hover:bg-white" />
+                  <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 hover:bg-white" />
+                </Carousel>
                 
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -291,15 +350,25 @@ const PopularPlans = () => {
 
                 {/* Featured Badge */}
                 {plan.featured && (
-                  <Badge className="absolute top-4 left-4 bg-accent text-accent-foreground">
+                  <Badge className="absolute top-4 left-4 bg-accent text-accent-foreground z-20">
                     Featured
                   </Badge>
                 )}
 
                 {/* Rating */}
-                <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/90 rounded-full px-3 py-1">
+                <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/90 rounded-full px-3 py-1 z-20">
                   <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   <span className="text-sm font-semibold">{plan.rating}</span>
+                </div>
+
+                {/* Image indicator dots */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1 z-20">
+                  {plan.images.map((_, dotIndex) => (
+                    <div 
+                      key={dotIndex}
+                      className="w-2 h-2 rounded-full bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity"
+                    />
+                  ))}
                 </div>
               </div>
 
