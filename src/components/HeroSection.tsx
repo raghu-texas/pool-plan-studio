@@ -5,14 +5,27 @@ import heroImage from "@/assets/hero-pool.jpg";
 const HeroSection = () => {
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background Image with Parallax Effect */}
-      <div 
-        className="absolute inset-0 parallax"
-        style={{
-          backgroundImage: `url(${heroImage})`,
-        }}
-      >
+      {/* Background Video with Parallax Effect */}
+      <div className="absolute inset-0 parallax">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          className="w-full h-full object-cover"
+          poster={heroImage}
+        >
+          <source src="https://videos.pexels.com/video-files/4041968/4041968-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 hero-overlay" />
+        
+        {/* Floating cinematic particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute w-2 h-2 bg-white/20 rounded-full animate-float" style={{ top: '20%', left: '10%', animationDelay: '0s' }}></div>
+          <div className="absolute w-1 h-1 bg-accent/30 rounded-full animate-float" style={{ top: '40%', left: '80%', animationDelay: '2s' }}></div>
+          <div className="absolute w-3 h-3 bg-white/10 rounded-full animate-float" style={{ top: '60%', left: '20%', animationDelay: '4s' }}></div>
+          <div className="absolute w-1.5 h-1.5 bg-accent/25 rounded-full animate-float" style={{ top: '80%', left: '70%', animationDelay: '6s' }}></div>
+          <div className="absolute w-2.5 h-2.5 bg-white/15 rounded-full animate-float" style={{ top: '30%', left: '60%', animationDelay: '8s' }}></div>
+        </div>
       </div>
 
       {/* Hero Content */}

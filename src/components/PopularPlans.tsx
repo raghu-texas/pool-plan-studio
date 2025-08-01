@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Heart, ShoppingCart, Star, Eye } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Heart, ShoppingCart, Star, Eye, Filter, SlidersHorizontal } from "lucide-react";
+import { useState } from "react";
 
 // Sample pool plans data
 const popularPlans = [
@@ -10,90 +12,214 @@ const popularPlans = [
     name: "Azure Infinity",
     image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop",
     tags: ["Infinity Edge", "Modern", "Luxury"],
+    category: "Modern",
+    style: "High End",
+    shape: "Infinity Edge",
+    function: "Entertaining",
     dimensions: "40' x 20'",
     price: "$299",
     rating: 4.9,
     reviews: 127,
-    featured: true
+    featured: true,
+    specialFeatures: ["Tanning Ledge", "Water Features"]
   },
   {
     id: 2,
     name: "Resort Paradise",
     image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop",
     tags: ["Entertaining", "Spa", "Large"],
+    category: "Entertaining",
+    style: "High End",
+    shape: "Freeform",
+    function: "With Spa",
     dimensions: "50' x 25'",
     price: "$449",
     rating: 4.8,
     reviews: 89,
-    featured: false
+    featured: false,
+    specialFeatures: ["Swim-up Bar", "Spa", "Rock Accents"]
   },
   {
     id: 3,
     name: "Modern Zen",
     image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
     tags: ["Modern", "Minimalist", "Spa"],
+    category: "Modern",
+    style: "Modern",
+    shape: "Geometric",
+    function: "With Spa",
     dimensions: "35' x 18'",
     price: "$199",
     rating: 4.7,
     reviews: 156,
-    featured: true
+    featured: true,
+    specialFeatures: ["Sundeck", "Minimalist Design"]
   },
   {
     id: 4,
     name: "Family Fun Pool",
     image: "https://images.unsplash.com/photo-1565985050384-a5dff2a6e7c0?w=800&h=600&fit=crop",
     tags: ["Family", "Play", "Slide"],
+    category: "Family",
+    style: "Classic",
+    shape: "Freeform",
+    function: "Play",
     dimensions: "45' x 30'",
     price: "$349",
     rating: 4.9,
     reviews: 203,
-    featured: false
+    featured: false,
+    specialFeatures: ["Slide", "Jump Rock", "Play Area"]
   },
   {
     id: 5,
     name: "Tropical Escape",
     image: "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?w=800&h=600&fit=crop",
     tags: ["Tropical", "Rock Features", "Waterfall"],
+    category: "Tropical",
+    style: "Classic",
+    shape: "Freeform",
+    function: "Entertaining",
     dimensions: "38' x 22'",
     price: "$379",
     rating: 4.8,
     reviews: 94,
-    featured: true
+    featured: true,
+    specialFeatures: ["Waterfall", "Rock Features", "Tropical Design"]
   },
   {
     id: 6,
     name: "Urban Oasis",
     image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop",
     tags: ["Urban", "Compact", "Modern"],
+    category: "Modern",
+    style: "Simple",
+    shape: "Geometric",
+    function: "Without Spa",
     dimensions: "25' x 15'",
     price: "$159",
     rating: 4.6,
     reviews: 78,
-    featured: false
+    featured: false,
+    specialFeatures: ["Compact Design", "Urban Style"]
   }
 ];
 
+const filterOptions = {
+  style: ["All Styles", "Modern", "Classic", "Simple", "High End"],
+  shape: ["All Shapes", "Straight Line", "Freeform", "Geometric", "Infinity Edge"],
+  function: ["All Functions", "Diving", "Play", "Entertaining", "With Spa", "Without Spa"],
+  category: ["All Categories", "Modern", "Entertaining", "Family", "Tropical"],
+  specialFeatures: ["All Features", "Tanning Ledge", "Sundeck", "Slide", "Swim-up Bar", "Waterfall", "Jump Rock", "Rock Accents", "Water Features"]
+};
+
 const PopularPlans = () => {
+  const [filters, setFilters] = useState({
+    style: "All Styles",
+    shape: "All Shapes",
+    function: "All Functions",
+    category: "All Categories",
+    specialFeatures: "All Features"
+  });
+
+  const filteredPlans = popularPlans.filter(plan => {
+    return (
+      (filters.style === "All Styles" || plan.style === filters.style) &&
+      (filters.shape === "All Shapes" || plan.shape === filters.shape) &&
+      (filters.function === "All Functions" || plan.function === filters.function) &&
+      (filters.category === "All Categories" || plan.category === filters.category) &&
+      (filters.specialFeatures === "All Features" || plan.specialFeatures.includes(filters.specialFeatures))
+    );
+  });
+
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          className="w-full h-full object-cover opacity-5"
+          poster="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1920&h=1080&fit=crop"
+        >
+          <source src="https://videos.pexels.com/video-files/3015536/3015536-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-background/60"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-16">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Popular Pool Plans
+              Premium Pool Plans
             </h2>
             <p className="text-xl text-muted-foreground">
-              Our most loved designs chosen by thousands of customers
+              Discover our curated collection of luxury swimming pool designs
             </p>
           </div>
-          <Button variant="outline" size="lg" className="mt-6 md:mt-0">
+          <Button variant="hero" size="lg" className="mt-6 md:mt-0">
             View All Plans
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
 
+        {/* Filters Section */}
+        <div className="glass p-6 rounded-xl mb-12 backdrop-blur-md border border-white/20">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-2">
+              <SlidersHorizontal className="h-5 w-5 text-primary" />
+              <h3 className="text-lg font-semibold text-foreground">Filter Pool Plans</h3>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            {Object.entries(filterOptions).map(([filterKey, options]) => (
+              <div key={filterKey} className="space-y-2">
+                <label className="text-sm font-medium text-foreground capitalize">
+                  {filterKey.replace(/([A-Z])/g, ' $1').trim()}
+                </label>
+                <Select
+                  value={filters[filterKey as keyof typeof filters]}
+                  onValueChange={(value) => setFilters(prev => ({ ...prev, [filterKey]: value }))}
+                >
+                  <SelectTrigger className="bg-background/50 border-border/50 hover:bg-background/80 transition-colors">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {options.map((option) => (
+                      <SelectItem key={option} value={option}>
+                        {option}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex justify-between items-center mt-6">
+            <p className="text-sm text-muted-foreground">
+              Showing {filteredPlans.length} of {popularPlans.length} plans
+            </p>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setFilters({
+                style: "All Styles",
+                shape: "All Shapes",
+                function: "All Functions",
+                category: "All Categories",
+                specialFeatures: "All Features"
+              })}
+            >
+              Clear Filters
+            </Button>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {popularPlans.map((plan, index) => (
+          {filteredPlans.map((plan, index) => (
             <Card 
               key={plan.id} 
               className="pool-card group border-0 shadow-custom-lg overflow-hidden"
@@ -150,14 +276,26 @@ const PopularPlans = () => {
                   <span>{plan.reviews} reviews</span>
                 </div>
 
-                <div className="flex justify-between items-center">
-                  <div className="text-2xl font-bold text-primary">
-                    {plan.price}
+                <div className="flex flex-col gap-3">
+                  <div className="flex justify-between items-center">
+                    <div className="text-2xl font-bold text-primary">
+                      {plan.price}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {plan.category}
+                    </div>
                   </div>
-                  <Button variant="premium" size="sm" className="group">
-                    <ShoppingCart className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-                    Add to Cart
-                  </Button>
+                  
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" className="flex-1 group">
+                      <Eye className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
+                      View Details
+                    </Button>
+                    <Button variant="premium" size="sm" className="flex-1 group">
+                      <ShoppingCart className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
+                      Add to Cart
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
