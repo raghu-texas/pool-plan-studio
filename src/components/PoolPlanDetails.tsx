@@ -71,7 +71,7 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
           >
             <source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/80 to-background/70 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-background/98 via-background/95 to-background/90 backdrop-blur-lg"></div>
         </div>
 
         {/* Close Button */}
@@ -79,7 +79,7 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
           variant="ghost"
           size="icon"
           onClick={onClose}
-          className="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 text-white border border-white/20"
+          className="absolute top-4 right-4 z-50 bg-background/80 hover:bg-background/90 text-foreground border border-border"
         >
           <X className="h-4 w-4" />
         </Button>
@@ -102,15 +102,15 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
               <div className="grid grid-cols-3 gap-4">
                 <div className="glass rounded-xl p-6 text-center border border-white/20">
                   <div className="text-3xl font-bold text-accent mb-2">{detailsData.depth}</div>
-                  <div className="text-white/80 text-sm">Pool Depth</div>
+                  <div className="text-muted-foreground text-sm">Pool Depth</div>
                 </div>
                 <div className="glass rounded-xl p-6 text-center border border-white/20">
                   <div className="text-3xl font-bold text-accent mb-2">{detailsData.volume}</div>
-                  <div className="text-white/80 text-sm">Water Volume</div>
+                  <div className="text-muted-foreground text-sm">Water Volume</div>
                 </div>
                 <div className="glass rounded-xl p-6 text-center border border-white/20">
                   <div className="text-3xl font-bold text-accent mb-2">{detailsData.totalArea}</div>
-                  <div className="text-white/80 text-sm">Total Area</div>
+                  <div className="text-muted-foreground text-sm">Total Area</div>
                 </div>
               </div>
             </div>
@@ -127,7 +127,7 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
                       </Badge>
                     ))}
                   </div>
-                  <DialogTitle className="text-3xl font-bold text-white mb-4">
+                  <DialogTitle className="text-3xl font-bold text-foreground mb-4">
                     {plan.name}
                   </DialogTitle>
                   <div className="flex items-center justify-between">
@@ -148,39 +148,39 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
 
               {/* Specifications */}
               <div className="glass rounded-xl p-6 border border-white/20">
-                <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Ruler className="h-5 w-5 mr-2 text-accent" />
                   Specifications
                 </h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-white/70">Pool Dimensions:</span>
-                    <div className="text-white font-medium">{detailsData.poolDimensions}</div>
+                    <span className="text-muted-foreground">Pool Dimensions:</span>
+                    <div className="text-foreground font-medium">{detailsData.poolDimensions}</div>
                   </div>
                   <div>
-                    <span className="text-white/70">Spa Dimensions:</span>
-                    <div className="text-white font-medium">{detailsData.spaDimensions}</div>
+                    <span className="text-muted-foreground">Spa Dimensions:</span>
+                    <div className="text-foreground font-medium">{detailsData.spaDimensions}</div>
                   </div>
                   <div>
-                    <span className="text-white/70">Perimeter:</span>
-                    <div className="text-white font-medium">{detailsData.perimeter}</div>
+                    <span className="text-muted-foreground">Perimeter:</span>
+                    <div className="text-foreground font-medium">{detailsData.perimeter}</div>
                   </div>
                   <div>
-                    <span className="text-white/70">Style:</span>
-                    <div className="text-white font-medium">{plan.style}</div>
+                    <span className="text-muted-foreground">Style:</span>
+                    <div className="text-foreground font-medium">{plan.style}</div>
                   </div>
                 </div>
               </div>
 
               {/* Features */}
               <div className="glass rounded-xl p-6 border border-white/20">
-                <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Sparkles className="h-5 w-5 mr-2 text-accent" />
                   Premium Features
                 </h3>
                 <div className="grid grid-cols-1 gap-2">
                   {detailsData.features.map((feature, index) => (
-                    <div key={index} className="flex items-center text-white/90">
+                    <div key={index} className="flex items-center text-foreground">
                       <Waves className="h-4 w-4 mr-2 text-accent" />
                       {feature}
                     </div>
@@ -190,12 +190,12 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
 
               {/* Equipment */}
               <div className="glass rounded-xl p-6 border border-white/20">
-                <h3 className="text-xl font-semibold text-white mb-4">
+                <h3 className="text-xl font-semibold text-foreground mb-4">
                   Equipment Package
                 </h3>
                 <div className="space-y-2">
                   {detailsData.equipmentIncluded.map((item, index) => (
-                    <div key={index} className="text-white/90 text-sm">
+                    <div key={index} className="text-foreground text-sm">
                       • {item}
                     </div>
                   ))}
@@ -204,13 +204,13 @@ const PoolPlanDetails = ({ isOpen, onClose, plan }: PoolPlanDetailsProps) => {
 
               {/* Downloads */}
               <div className="glass rounded-xl p-6 border border-white/20">
-                <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Download className="h-5 w-5 mr-2 text-accent" />
                   Included Downloads
                 </h3>
                 <div className="space-y-2 mb-4">
                   {detailsData.downloadableFiles.map((file, index) => (
-                    <div key={index} className="text-white/90 text-sm">
+                    <div key={index} className="text-foreground text-sm">
                       📄 {file}
                     </div>
                   ))}

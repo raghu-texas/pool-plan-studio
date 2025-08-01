@@ -10,10 +10,11 @@ import {
   Heart,
   Crown
 } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [cartCount] = useState(3);
+  const { itemCount } = useCart();
 
   const navigation = [
     { name: "Browse Plans", href: "#" },
@@ -68,9 +69,9 @@ const Header = () => {
             {/* Cart */}
             <Button variant="ghost" size="icon" className="relative hover:bg-accent/20">
               <ShoppingCart className="h-5 w-5" />
-              {cartCount > 0 && (
+              {itemCount > 0 && (
                 <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-accent text-accent-foreground text-xs">
-                  {cartCount}
+                  {itemCount > 99 ? '99+' : itemCount}
                 </Badge>
               )}
             </Button>

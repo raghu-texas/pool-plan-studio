@@ -5,6 +5,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Heart, ShoppingCart, Star, Eye, Filter, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
 import PoolPlanDetails from "./PoolPlanDetails";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "@/hooks/use-toast";
 
 // Sample pool plans data
 const popularPlans = [
@@ -115,6 +117,7 @@ const filterOptions = {
 };
 
 const PopularPlans = () => {
+  const { addToCart } = useCart();
   const [filters, setFilters] = useState({
     style: "All Styles",
     shape: "All Shapes",
@@ -129,6 +132,19 @@ const PopularPlans = () => {
   const handleViewDetails = (plan: typeof popularPlans[0]) => {
     setSelectedPlan(plan);
     setIsDetailsOpen(true);
+  };
+
+  const handleAddToCart = (plan: typeof popularPlans[0]) => {
+    addToCart({
+      id: plan.id,
+      name: plan.name,
+      price: plan.price,
+      image: plan.image
+    });
+    toast({
+      title: "Added to Cart",
+      description: `${plan.name} has been added to your cart.`,
+    });
   };
 
   const filteredPlans = popularPlans.filter(plan => {
@@ -305,7 +321,12 @@ const PopularPlans = () => {
                       <Eye className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
                       View Details
                     </Button>
-                    <Button variant="premium" size="sm" className="flex-1 group">
+                    <Button 
+                      variant="premium" 
+                      size="sm" 
+                      className="flex-1 group"
+                      onClick={() => handleAddToCart(plan)}
+                    >
                       <ShoppingCart className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
                       Add to Cart
                     </Button>
