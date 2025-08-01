@@ -19,27 +19,9 @@ const Index = () => {
       <main>
         <HeroSection />
         
-        {/* Ad between Hero and Categories */}
-        <div className="py-6 flex justify-center">
-          <img 
-            src="/lovable-uploads/c40c4b19-fe94-4f89-94b7-d5dff87b808e.png" 
-            alt="Hot Home Designs Advertisement" 
-            className="max-w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
-            onClick={() => window.open('#', '_blank')}
-          />
-        </div>
         
         <FeaturedCategories />
         
-        {/* Ad between Categories and Popular Plans */}
-        <div className="py-6 flex justify-center">
-          <img 
-            src="/lovable-uploads/c40c4b19-fe94-4f89-94b7-d5dff87b808e.png" 
-            alt="Hot Home Designs Advertisement" 
-            className="max-w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
-            onClick={() => window.open('#', '_blank')}
-          />
-        </div>
         
         <PopularPlans />
         
@@ -50,15 +32,6 @@ const Index = () => {
         
         <Amenities />
         
-        {/* Ad between Amenities and Subscription */}
-        <div className="py-6 flex justify-center">
-          <img 
-            src="/lovable-uploads/c40c4b19-fe94-4f89-94b7-d5dff87b808e.png" 
-            alt="Hot Home Designs Advertisement" 
-            className="max-w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
-            onClick={() => window.open('#', '_blank')}
-          />
-        </div>
         
         <SubscriptionBanner />
         
