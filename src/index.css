@@ -20,10 +20,10 @@ All colors MUST be HSL for consistency across light/dark modes.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* Primary Brand Colors - Deep Ocean Blue */
-    --primary: 210 100% 45%;
-    --primary-light: 210 100% 55%;
-    --primary-dark: 210 100% 35%;
+    /* Primary Brand Colors - Warm Indigo (#4F46E5) */
+    --primary: 243 75% 59%;
+    --primary-light: 243 75% 69%;
+    --primary-dark: 243 75% 49%;
     --primary-foreground: 0 0% 100%;
 
     /* Secondary - Soft Blue */
@@ -99,9 +99,9 @@ All colors MUST be HSL for consistency across light/dark modes.
     --popover: 215 25% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 100% 55%;
-    --primary-light: 210 100% 65%;
-    --primary-dark: 210 100% 45%;
+    --primary: 243 75% 69%;
+    --primary-light: 243 75% 79%;
+    --primary-dark: 243 75% 59%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 215 25% 15%;

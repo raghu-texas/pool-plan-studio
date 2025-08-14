@@ -12,9 +12,11 @@ import {
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import CartIcon from "./CartIcon";
+import AuthModal from "./AuthModal";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { itemCount } = useCart();
 
   const navigation = [
@@ -71,7 +73,12 @@ const Header = () => {
             <CartIcon />
 
             {/* User Account */}
-            <Button variant="outline" size="sm" className="hidden sm:flex">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="hidden sm:flex hover:bg-primary hover:text-primary-foreground transition-all duration-200"
+              onClick={() => setIsAuthModalOpen(true)}
+            >
               <User className="h-4 w-4 mr-2" />
               Login
             </Button>
@@ -102,7 +109,12 @@ const Header = () => {
                 </a>
               ))}
               <div className="pt-2 border-t border-border/20">
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full hover:bg-primary hover:text-primary-foreground transition-all duration-200"
+                  onClick={() => setIsAuthModalOpen(true)}
+                >
                   <User className="h-4 w-4 mr-2" />
                   Login
                 </Button>
@@ -111,6 +123,12 @@ const Header = () => {
           </div>
         )}
       </div>
+      
+      {/* Authentication Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </header>
   );
 };
