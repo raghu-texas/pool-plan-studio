@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Eye, EyeOff, Github, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
+import PasswordResetModal from "./PasswordResetModal";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPasswordReset, setShowPasswordReset] = useState(false);
   const { toast } = useToast();
 
   // Form states
@@ -188,6 +190,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   <div className="flex justify-end">
                     <button 
                       type="button"
+                      onClick={() => setShowPasswordReset(true)}
                       className="text-primary hover:text-primary-dark text-sm font-medium transition-colors"
                     >
                       Forgot password?
@@ -325,6 +328,15 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           </div>
         </div>
       </DialogContent>
+      
+      <PasswordResetModal
+        isOpen={showPasswordReset}
+        onClose={() => setShowPasswordReset(false)}
+        onBackToLogin={() => {
+          setShowPasswordReset(false);
+          // Keep the main auth modal open when coming back from password reset
+        }}
+      />
     </Dialog>
   );
 };
