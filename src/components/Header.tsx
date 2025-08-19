@@ -17,6 +17,7 @@ import AuthModal from "./AuthModal";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("Browse Plans");
   const { itemCount } = useCart();
 
   const navigation = [
@@ -45,16 +46,30 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
-              >
-                {item.name}
-              </a>
-            ))}
+          <nav className="hidden md:flex items-center justify-center flex-1 px-8">
+            <div className="flex items-center space-x-10">
+              {navigation.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveLink(item.name);
+                  }}
+                  className={`relative font-medium transition-all duration-300 hover:text-primary ${
+                    activeLink === item.name 
+                      ? 'text-primary' 
+                      : 'text-foreground hover:text-primary'
+                  } after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:origin-center after:transition-all after:duration-300 ${
+                    activeLink === item.name 
+                      ? 'after:scale-x-100' 
+                      : 'after:scale-x-0 hover:after:scale-x-100'
+                  }`}
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
           </nav>
 
           {/* Right Side Icons */}
@@ -103,7 +118,16 @@ const Header = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent/20 rounded-md transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveLink(item.name);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block px-3 py-2 rounded-md transition-all duration-300 ${
+                    activeLink === item.name 
+                      ? 'text-primary bg-primary/10 border-l-2 border-primary' 
+                      : 'text-foreground hover:text-primary hover:bg-accent/20'
+                  }`}
                 >
                   {item.name}
                 </a>
