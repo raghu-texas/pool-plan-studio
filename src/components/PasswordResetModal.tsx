@@ -63,8 +63,8 @@ const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
         newErrors.email = 'Please enter a valid email';
       }
     } else if (currentStep === 'otp') {
-      if (!otp || otp.length !== 4) {
-        newErrors.otp = 'Please enter the 4-digit code';
+      if (!otp || otp.length !== 6) {
+        newErrors.otp = 'Please enter the 6-digit code';
       }
     } else if (currentStep === 'reset') {
       if (!newPassword) {
@@ -96,7 +96,7 @@ const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
       if (currentStep === 'forgot') {
         toast({
           title: "Code sent!",
-          description: `We've sent a 4-digit code to ${email}`,
+          description: `We've sent a 6-digit code to ${email}`,
         });
         setCurrentStep('otp');
       } else if (currentStep === 'otp') {
@@ -250,7 +250,7 @@ const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
               <div className="space-y-6 animate-fade-in-up">
                 <div className="text-center space-y-2">
                   <p className="text-muted-foreground text-sm">
-                    We've sent a 4-digit verification code to
+                    We've sent a 6-digit verification code to
                   </p>
                   <p className="font-medium text-foreground">{email}</p>
                 </div>
@@ -261,22 +261,27 @@ const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
                   </Label>
                   <div className="flex justify-center">
                     <InputOTP
-                      maxLength={4}
+                      maxLength={6}
                       value={otp}
                       onChange={setOtp}
                       className="gap-2"
                     >
                       <InputOTPGroup>
-                        <InputOTPSlot index={0} className="w-14 h-14 text-lg font-semibold" />
-                        <InputOTPSlot index={1} className="w-14 h-14 text-lg font-semibold" />
-                        <InputOTPSlot index={2} className="w-14 h-14 text-lg font-semibold" />
-                        <InputOTPSlot index={3} className="w-14 h-14 text-lg font-semibold" />
+                        <InputOTPSlot index={0} className="w-12 h-12 text-lg font-semibold" />
+                        <InputOTPSlot index={1} className="w-12 h-12 text-lg font-semibold" />
+                        <InputOTPSlot index={2} className="w-12 h-12 text-lg font-semibold" />
+                        <InputOTPSlot index={3} className="w-12 h-12 text-lg font-semibold" />
+                        <InputOTPSlot index={4} className="w-12 h-12 text-lg font-semibold" />
+                        <InputOTPSlot index={5} className="w-12 h-12 text-lg font-semibold" />
                       </InputOTPGroup>
                     </InputOTP>
                   </div>
                   {errors.otp && (
                     <p className="text-destructive text-sm text-center animate-fade-in-up">{errors.otp}</p>
                   )}
+                  <p className="text-xs text-muted-foreground text-center mt-2">
+                    For demo purposes, use code: <span className="font-mono font-semibold">123456</span>
+                  </p>
                 </div>
 
                 <Button 
