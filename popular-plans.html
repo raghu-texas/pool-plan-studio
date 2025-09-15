@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Pool Plans</title>
+    <link rel="stylesheet" href="popular-plans.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="popular-plans">
+        <!-- Background Video -->
+        <div class="background-video">
+            <video autoplay muted loop poster="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1920&h=1080&fit=crop">
+                <source src="https://videos.pexels.com/video-files/3015536/3015536-uhd_2560_1440_30fps.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-content">
+                    <h2 class="title">Premium Pool Plans</h2>
+                    <p class="subtitle">Discover our curated collection of luxury swimming pool designs</p>
+                </div>
+                <button class="btn btn-hero">
+                    View All Plans
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="filter-section glass">
+                <div class="filter-header">
+                    <h3>Explore by Category</h3>
+                </div>
+                <div class="category-buttons">
+                    <button class="btn btn-category active" data-category="All Categories">All Categories</button>
+                    <button class="btn btn-category" data-category="Modern">Modern</button>
+                    <button class="btn btn-category" data-category="Entertaining">Entertaining</button>
+                    <button class="btn btn-category" data-category="Family">Family</button>
+                    <button class="btn btn-category" data-category="Tropical">Tropical</button>
+                </div>
+            </div>
+
+            <!-- Advanced Filters -->
+            <div class="advanced-filters glass">
+                <div class="filter-header">
+                    <div class="filter-title">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        <h3>Advanced Filters</h3>
+                    </div>
+                </div>
+                
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>Style</label>
+                        <select id="style-filter">
+                            <option value="All Styles">All Styles</option>
+                            <option value="Modern">Modern</option>
+                            <option value="Classic">Classic</option>
+                            <option value="Simple">Simple</option>
+                            <option value="High End">High End</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Shape</label>
+                        <select id="shape-filter">
+                            <option value="All Shapes">All Shapes</option>
+                            <option value="Straight Line">Straight Line</option>
+                            <option value="Freeform">Freeform</option>
+                            <option value="Geometric">Geometric</option>
+                            <option value="Infinity Edge">Infinity Edge</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Function</label>
+                        <select id="function-filter">
+                            <option value="All Functions">All Functions</option>
+                            <option value="Diving">Diving</option>
+                            <option value="Play">Play</option>
+                            <option value="Entertaining">Entertaining</option>
+                            <option value="With Spa">With Spa</option>
+                            <option value="Without Spa">Without Spa</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Special Features</label>
+                        <select id="features-filter">
+                            <option value="All Features">All Features</option>
+                            <option value="Tanning Ledge">Tanning Ledge</option>
+                            <option value="Sundeck">Sundeck</option>
+                            <option value="Slide">Slide</option>
+                            <option value="Swim-up Bar">Swim-up Bar</option>
+                            <option value="Waterfall">Waterfall</option>
+                            <option value="Jump Rock">Jump Rock</option>
+                            <option value="Rock Accents">Rock Accents</option>
+                            <option value="Water Features">Water Features</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-footer">
+                    <p class="results-count">Showing <span id="results-count">6</span> of 6 plans</p>
+                    <button class="btn btn-outline btn-sm" id="clear-filters">Clear Filters</button>
+                </div>
+            </div>
+
+            <!-- Pool Plans Grid -->
+            <div class="plans-grid" id="plans-grid">
+                <!-- Plans will be dynamically inserted here -->
+            </div>
+
+            <!-- Load More -->
+            <div class="load-more">
+                <button class="btn btn-outline btn-lg">Load More Plans</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Details Modal -->
+    <div class="modal" id="plan-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Plan Details</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Plan details will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="popular-plans.js"></script>
+</body>
+</html>
