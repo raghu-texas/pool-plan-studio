@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Eye, EyeOff, Github, Mail, ArrowLeft, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
 import PasswordResetModal from "./PasswordResetModal";
 
@@ -26,6 +27,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // Form states
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
@@ -117,12 +119,23 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      toast({
-        title: "Welcome back!",
-        description: "You have successfully signed in.",
-      });
-      
-      onClose();
+      // Check for builder credentials
+      if (loginForm.email === 'admin@gmail.com' && loginForm.password === 'Admin@123') {
+        toast({
+          title: "Welcome back, Builder!",
+          description: "Redirecting to dashboard...",
+        });
+        
+        onClose();
+        navigate('/dashboard');
+      } else {
+        toast({
+          title: "Welcome back!",
+          description: "You have successfully signed in.",
+        });
+        
+        onClose();
+      }
     } catch (error) {
       toast({
         title: "Error",
