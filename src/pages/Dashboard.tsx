@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { SubscriptionSummary } from "@/components/dashboard/SubscriptionSummary";
 import { ClientsDataTable } from "@/components/dashboard/ClientsDataTable";
-import { AnalyticsWidgets } from "@/components/dashboard/AnalyticsWidgets";
+import { FavouritePlans } from "@/components/dashboard/FavouritePlans";
 import { SidebarProvider } from "@/components/ui/sidebar";
 const Dashboard = () => {
   const [selectedView, setSelectedView] = useState("dashboard");
@@ -28,7 +28,7 @@ const Dashboard = () => {
           </div>;
       default:
         return <>
-            <AnalyticsWidgets />
+            <FavouritePlans />
             <div className="p-6">
               <h2 className="text-2xl font-semibold text-foreground mb-6">Active Pool Plans</h2>
               <ClientsDataTable type="dashboard" />
