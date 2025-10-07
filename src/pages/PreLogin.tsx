@@ -33,8 +33,11 @@ const PreLogin = () => {
           style={{ transformStyle: 'preserve-3d' }}
         >
           <div 
-            className="absolute inset-0 bg-card/50 backdrop-blur-sm rounded-3xl shadow-custom-lg overflow-hidden animate-fade-in flex items-center justify-center"
-            style={{ backfaceVisibility: 'hidden' }}
+            className="absolute inset-0 rounded-3xl shadow-custom-lg overflow-hidden animate-fade-in flex items-center justify-center"
+            style={{ 
+              backfaceVisibility: 'hidden',
+              backgroundImage: 'linear-gradient(180.7deg, rgba(11,47,159,1) -28.8%, rgba(199,255,216,1) 95.4%)'
+            }}
           >
             <div className="flex flex-row items-center justify-center gap-24 w-full px-8">
               {/* Consumer Container */}
