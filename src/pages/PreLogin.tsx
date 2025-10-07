@@ -80,7 +80,7 @@ const PreLogin = () => {
                   </h2>
                   <button
                     onClick={handleBuilderClick}
-                    className="px-12 py-6 rounded-3xl bg-gradient-to-br from-accent to-accent-light text-accent-foreground font-bold text-lg md:text-xl shadow-glow hover:shadow-custom-lg hover:scale-105 transition-all duration-500 ease-out group animate-scale-in"
+                    className="px-12 py-6 rounded-3xl bg-gradient-to-br from-primary to-primary-light text-primary-foreground font-bold text-lg md:text-xl shadow-glow hover:shadow-custom-lg hover:scale-105 transition-all duration-500 ease-out group animate-scale-in"
                     style={{ animationDelay: "0.3s" }}
                   >
                     <span className="group-hover:scale-110 transition-transform duration-300">
