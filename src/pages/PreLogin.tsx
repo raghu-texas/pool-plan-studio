@@ -20,7 +20,7 @@ const PreLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-primary/10 flex items-center justify-center p-4 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 flex items-center justify-center p-4 overflow-hidden">
       <div 
         className="w-full max-w-6xl h-[600px] relative"
         style={{ perspective: '2000px' }}
@@ -33,27 +33,12 @@ const PreLogin = () => {
           style={{ transformStyle: 'preserve-3d' }}
         >
           <div 
-            className="absolute inset-0 bg-card/50 backdrop-blur-sm rounded-3xl shadow-custom-lg overflow-hidden animate-fade-in"
+            className="absolute inset-0 bg-card/50 backdrop-blur-sm rounded-3xl shadow-custom-lg overflow-hidden animate-fade-in flex items-center justify-center"
             style={{ backfaceVisibility: 'hidden' }}
           >
-            {/* Diagonal divider line */}
-            <div className="absolute inset-0 pointer-events-none">
-              <svg width="100%" height="100%" className="absolute inset-0">
-                <line
-                  x1="0"
-                  y1="100%"
-                  x2="100%"
-                  y2="0"
-                  stroke="hsl(var(--primary) / 0.2)"
-                  strokeWidth="2"
-                  className="drop-shadow-md"
-                />
-              </svg>
-            </div>
-
-            {/* Consumer Section - Top Left */}
-            <div className="absolute top-0 left-0 w-1/2 h-1/2 flex items-center justify-center animate-slide-in-left p-8">
-              <div className="flex flex-col items-center gap-6 w-full">
+            <div className="flex flex-row items-center justify-center gap-12 w-full px-8">
+              {/* Consumer Section */}
+              <div className="flex flex-col items-center gap-6 animate-slide-in-left">
                 <div className="w-32 h-32 rounded-full overflow-hidden shadow-custom-lg mb-2">
                   <img 
                     src={consumerImage} 
@@ -74,11 +59,9 @@ const PreLogin = () => {
                   </span>
                 </button>
               </div>
-            </div>
 
-            {/* Builder Section - Bottom Right */}
-            <div className="absolute bottom-0 right-0 w-1/2 h-1/2 flex items-center justify-center animate-slide-in-right p-8">
-              <div className="flex flex-col items-center gap-6 w-full">
+              {/* Builder Section */}
+              <div className="flex flex-col items-center gap-6 animate-slide-in-right">
                 <div className="w-32 h-32 rounded-full overflow-hidden shadow-custom-lg mb-2">
                   <img 
                     src={builderImage} 
