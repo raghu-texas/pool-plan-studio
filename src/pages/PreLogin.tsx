@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import AuthModal from "@/components/AuthModal";
 import consumerImage from "@/assets/consumer-image.jpg";
 import builderImage from "@/assets/builder-image.jpg";
+import consumerIcon from "@/assets/consumer-icon.png";
+import builderIcon from "@/assets/builder-icon.png";
 
 const PreLogin = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -53,17 +55,24 @@ const PreLogin = () => {
 
             {/* Consumer Section - Top Left */}
             <div className="absolute top-0 left-0 w-1/2 h-1/2 flex items-center justify-center animate-slide-in-left p-8">
-              <div className="flex flex-col items-center gap-6 w-full">
-                <div className="w-32 h-32 rounded-full overflow-hidden shadow-custom-lg mb-2">
+              <div className="flex flex-col items-center gap-4 w-full">
+                <div className="w-24 h-24 mb-2">
+                  <img 
+                    src={consumerIcon} 
+                    alt="Consumer Icon" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight animate-fade-in">
+                  I am consumer
+                </h2>
+                <div className="w-32 h-32 rounded-full overflow-hidden shadow-custom-lg">
                   <img 
                     src={consumerImage} 
                     alt="Consumer" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight animate-fade-in">
-                  I am consumer
-                </h2>
                 <button
                   onClick={handleConsumerClick}
                   className="px-12 py-6 rounded-3xl bg-gradient-to-br from-primary to-primary-light text-primary-foreground font-bold text-lg md:text-xl shadow-glow hover:shadow-custom-lg hover:scale-105 transition-all duration-500 ease-out group animate-scale-in"
@@ -78,17 +87,24 @@ const PreLogin = () => {
 
             {/* Builder Section - Bottom Right */}
             <div className="absolute bottom-0 right-0 w-1/2 h-1/2 flex items-center justify-center animate-slide-in-right p-8">
-              <div className="flex flex-col items-center gap-6 w-full">
-                <div className="w-32 h-32 rounded-full overflow-hidden shadow-custom-lg mb-2">
+              <div className="flex flex-col items-center gap-4 w-full">
+                <div className="w-24 h-24 mb-2">
+                  <img 
+                    src={builderIcon} 
+                    alt="Builder Icon" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight animate-fade-in">
+                  I am builder
+                </h2>
+                <div className="w-32 h-32 rounded-full overflow-hidden shadow-custom-lg">
                   <img 
                     src={builderImage} 
                     alt="Builder" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight animate-fade-in">
-                  I am builder
-                </h2>
                 <button
                   onClick={handleBuilderClick}
                   className="px-12 py-6 rounded-3xl bg-gradient-to-br from-accent to-accent-light text-accent-foreground font-bold text-lg md:text-xl shadow-glow hover:shadow-custom-lg hover:scale-105 transition-all duration-500 ease-out group animate-scale-in"
