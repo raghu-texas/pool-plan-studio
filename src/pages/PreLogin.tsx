@@ -27,8 +27,8 @@ const PreLogin = () => {
       >
         <div 
           className={`w-full h-full relative transition-transform duration-700 ease-out ${
-            flippedSide === 'consumer' ? '[transform:rotateY(180deg)]' : 
-            flippedSide === 'builder' ? '[transform:rotateY(-180deg)]' : ''
+            flippedSide === 'consumer' ? '[transform:rotate3d(1,1,0,180deg)]' : 
+            flippedSide === 'builder' ? '[transform:rotate3d(-1,1,0,180deg)]' : ''
           }`}
           style={{ transformStyle: 'preserve-3d' }}
         >
